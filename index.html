@@ -3,134 +3,58 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Plataforma educativa de la I.E. N.° 82661 Nuestra Señora de Lourdes">
+  <meta name="description" content="Plataforma educativa de la I.E. N.° 82661 Nuestra Señora de Lourdes, Bambamarca. Aprendemos con fe, verdad y servicio, inspirados en la Madre Eduviges Portalet.">
+  <meta name="theme-color" content="#20231f">
   <title>I.E. N.° 82661 Nuestra Señora de Lourdes</title>
+  <link rel="icon" href="imagenes/insignia-lourdes.png" type="image/png">
   <link rel="stylesheet" href="css/estilos.css">
 </head>
 <body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+  <div class="franja"><div class="contenedor"><span>Familia dominica · Bambamarca</span><span>Fe · Verdad · Servicio</span></div></div>
   <header class="encabezado">
     <div class="contenedor nav">
-      <div class="marca">
-        <div class="logo">IE</div>
-        <div>
-          <h1>I.E. N.° 82661</h1>
-          <p>Nuestra Señora de Lourdes</p>
-        </div>
-      </div>
-
-      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">☰</button>
-
-      <nav id="menu">
-        <a href="#inicio">Inicio</a>
-        <a href="#fichas">Fichas</a>
-        <a href="#evaluaciones">Evaluaciones</a>
-        <a href="#recursos">Recursos</a>
+      <a class="marca" href="#inicio" aria-label="Nuestra Señora de Lourdes, inicio">
+        <img class="logo" src="imagenes/insignia-lourdes.png" width="1600" height="1600" alt="Insignia de la I.E. N.° 82661 Nuestra Señora de Lourdes">
+        <span><strong>I.E. N.° 82661</strong><span>Nuestra Señora de Lourdes</span></span>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu"><span aria-hidden="true">☰</span></button>
+      <nav id="menu" aria-label="Navegación principal">
+        <a href="#inicio">Inicio</a><a href="#identidad">Nuestra identidad</a><a href="#fichas">Fichas</a><a href="#recursos">Recursos</a><a class="nav-acceso" href="#grados">Acceso de estudiantes <span aria-hidden="true">↗</span></a>
       </nav>
     </div>
   </header>
-
-  <main>
-    <section class="hero" id="inicio">
+  <main id="contenido">
+    <section class="hero" id="inicio" aria-labelledby="bienvenida">
       <div class="contenedor hero-grid">
-        <div>
-          <span class="etiqueta">Plataforma Educativa</span>
-          <h2>Aprendemos, compartimos y crecemos juntos</h2>
-          <p>
-            Espacio digital de la I.E. N.° 82661 “Nuestra Señora de Lourdes”
-            para organizar fichas interactivas, evaluaciones y recursos de aprendizaje.
-          </p>
-          <div class="acciones">
-            <a class="boton principal" href="#fichas">Ver fichas</a>
-            <a class="boton secundario" href="#evaluaciones">Ir a evaluaciones</a>
-          </div>
+        <div class="hero-texto">
+          <p class="etiqueta"><span class="raya"></span>Educamos con fe y esperanza</p>
+          <h1 id="bienvenida">Aprender para servir.<br><em>Crecer en la verdad.</em></h1>
+          <p class="intro">Bienvenidos a nuestra familia educativa. Un espacio para aprender, descubrir y crecer juntos, con el amor de Dios y la luz de nuestra identidad dominica.</p>
+          <div class="acciones"><a class="boton principal" href="#grados">Ingresar a mi grado <span aria-hidden="true">→</span></a><a class="enlace" href="#identidad">Conoce nuestra inspiración <span aria-hidden="true">↗</span></a></div>
+          <div class="hero-nota"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Z"/><path d="M12 6v14"/></svg><span>Unimos el aprendizaje, la fe y el servicio<br>en cada paso de nuestra formación.</span></div>
         </div>
-
-        <div class="panel">
-          <div class="panel-icono">📘</div>
-          <h3>Bienvenidos</h3>
-          <p>Un espacio pensado para estudiantes, docentes y familias.</p>
-        </div>
+        <figure class="hero-imagen">
+          <div class="marco-hero"><img src="imagenes/madre-eduviges-portalet.jpeg" width="720" height="960" alt="Pintura de la Madre Eduviges Portalet acompañando a un grupo de niños" fetchpriority="high"></div>
+          <figcaption><span class="pequeno">Nuestra inspiración</span><strong>Madre Eduviges Portalet</strong><span>Una vida dedicada a amar y servir.</span></figcaption>
+        </figure>
       </div>
     </section>
-
-    <section class="seccion" id="fichas">
-      <div class="contenedor">
-        <p class="subtitulo">Aprendizaje interactivo</p>
-        <h2>Fichas de trabajo</h2>
-        <div class="tarjetas">
-          <article class="tarjeta">
-            <div class="icono">➗</div>
-            <h3>Matemática</h3>
-            <p>Ejercicios interactivos de fracciones, operaciones y resolución de problemas.</p>
-            <a href="fichas-interactivas/suma-resta-fracciones-4to.html">Abrir ficha de fracciones →</a>
-          </article>
-
-          <article class="tarjeta">
-            <div class="icono">📖</div>
-            <h3>Comunicación</h3>
-            <p>Lecturas, comprensión, gramática, producción de textos y actividades.</p>
-            <a href="fichas-interactivas/">Explorar fichas →</a>
-          </article>
-
-          <article class="tarjeta">
-            <div class="icono">🔬</div>
-            <h3>Ciencia y otras áreas</h3>
-            <p>Recursos para investigar, aprender y aplicar conocimientos.</p>
-            <a href="recursos/">Ver recursos →</a>
-          </article>
-        </div>
+    <section class="carisma" aria-label="Carisma de la congregación"><div class="contenedor"><span class="cruz" aria-hidden="true">✝</span><div><p>«Predicar la Verdad y portar la Luz de Cristo»</p><span>Hermanas Dominicas de la Inmaculada Concepción</span></div><span class="ornamento" aria-hidden="true">✦</span></div></section>
+    <section class="seccion grados-seccion" id="grados" aria-labelledby="grados-titulo">
+      <div class="contenedor"><div class="titulo-fila"><div><p class="etiqueta">Acceso de estudiantes · Primaria</p><h2 id="grados-titulo">Tu aprendizaje empieza aquí</h2></div><p>Elige tu grado e ingresa<br>a tu espacio de aprendizaje.</p></div><div class="grados-grid"><a class="grado" href="https://ie82661.com/1"><span class="grado-num">1<small>.º</small></span><span><strong>Primer grado</strong><small>Ingresar a mi aula</small></span><span class="grado-flecha" aria-hidden="true">↗</span></a><a class="grado" href="https://ie82661.com/2"><span class="grado-num">2<small>.º</small></span><span><strong>Segundo grado</strong><small>Ingresar a mi aula</small></span><span class="grado-flecha" aria-hidden="true">↗</span></a><a class="grado" href="https://ie82661.com/3"><span class="grado-num">3<small>.º</small></span><span><strong>Tercer grado</strong><small>Ingresar a mi aula</small></span><span class="grado-flecha" aria-hidden="true">↗</span></a><a class="grado" href="https://ie82661.com/4"><span class="grado-num">4<small>.º</small></span><span><strong>Cuarto grado</strong><small>Ingresar a mi aula</small></span><span class="grado-flecha" aria-hidden="true">↗</span></a><a class="grado" href="https://ie82661.com/5"><span class="grado-num">5<small>.º</small></span><span><strong>Quinto grado</strong><small>Ingresar a mi aula</small></span><span class="grado-flecha" aria-hidden="true">↗</span></a><a class="grado" href="https://ie82661.com/6"><span class="grado-num">6<small>.º</small></span><span><strong>Sexto grado</strong><small>Ingresar a mi aula</small></span><span class="grado-flecha" aria-hidden="true">↗</span></a></div><p class="ayuda-acceso">Al ingresar, escribe tu primer nombre y tu número de DNI o documento.</p></div>
+    </section>
+    <section class="seccion identidad" id="identidad" aria-labelledby="identidad-titulo">
+      <div class="contenedor identidad-grid">
+        <figure class="retrato"><div class="retrato-marco"><img src="imagenes/eduviges-retrato.jpg" width="473" height="473" alt="Retrato de la Madre Eduviges Portalet" loading="lazy"></div><figcaption>Madre Eduviges Portalet<br><span>Fundadora de la congregación</span></figcaption></figure>
+        <div><p class="etiqueta">Nuestra identidad dominica</p><h2 id="identidad-titulo">Una luz que sigue<br>inspirando nuestra misión</h2><p>La Madre Eduviges Portalet fundó en 1869, en Toulouse, Francia, la Congregación de las Hermanas Dominicas de la Inmaculada Concepción.</p><p>Su entrega a la educación de niños ciegos nos invita a mirar a cada persona con amor y a poner lo que aprendemos al servicio de los demás.</p><a class="enlace" href="https://hermanasdicperu.org/820-2/" target="_blank" rel="noopener noreferrer">Conocer su vida y su legado <span aria-hidden="true">↗</span></a><div class="valores"><div><span>01</span><h3>Fe</h3><p>Crecemos en el amor a Dios.</p></div><div><span>02</span><h3>Verdad</h3><p>Aprendemos con honestidad.</p></div><div><span>03</span><h3>Servicio</h3><p>Compartimos para ayudar.</p></div></div></div>
       </div>
     </section>
-
-    <section class="seccion suave" id="evaluaciones">
-      <div class="contenedor">
-        <p class="subtitulo">Seguimiento del aprendizaje</p>
-        <h2>Evaluaciones</h2>
-        <div class="bloque">
-          <div>
-            <h3>Prácticas y evaluaciones en línea</h3>
-            <p>
-              Aquí se organizarán las evaluaciones por grado, área y tema.
-              Cada nueva actividad podrá agregarse sin cambiar la estructura principal.
-            </p>
-          </div>
-          <a class="boton principal" href="evaluaciones/">Ver evaluaciones</a>
-        </div>
-      </div>
-    </section>
-
-    <section class="seccion" id="recursos">
-      <div class="contenedor">
-        <p class="subtitulo">Material de apoyo</p>
-        <h2>Recursos educativos</h2>
-        <div class="tarjetas">
-          <article class="tarjeta">
-            <div class="icono">📝</div>
-            <h3>Materiales</h3>
-            <p>Documentos y recursos complementarios para las actividades de aula.</p>
-          </article>
-          <article class="tarjeta">
-            <div class="icono">🖼️</div>
-            <h3>Imágenes</h3>
-            <p>Recursos visuales para fichas, exposiciones y proyectos escolares.</p>
-          </article>
-          <article class="tarjeta">
-            <div class="icono">⭐</div>
-            <h3>Novedades</h3>
-            <p>Este espacio podrá mostrar nuevos materiales y actividades destacadas.</p>
-          </article>
-        </div>
-      </div>
-    </section>
+    <section class="seccion" id="fichas" aria-labelledby="fichas-titulo"><div class="contenedor"><p class="etiqueta">Aprender, practicar y descubrir</p><h2 id="fichas-titulo">Fichas de trabajo</h2><div class="tarjetas"><article class="tarjeta"><div class="icono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 6c-3-2-6-2-9-1v14c3-1 6-1 9 1 3-2 6-2 9-1V5c-3-1-6-1-9 1Z"/><path d="M12 6v14"/></svg></div><p class="categoria">Matemática · 4.º grado</p><h3>Practicamos con fracciones</h3><p>Refuerza lo aprendido con ejercicios interactivos de suma y resta.</p><a class="enlace" href="fichas-interactivas/suma-resta-fracciones-4to.html">Abrir ficha <span aria-hidden="true">→</span></a></article><article class="tarjeta"><div class="icono" aria-hidden="true">Aa</div><p class="categoria">Comunicación</p><h3>Leemos y nos expresamos</h3><p>Un espacio para nuevas lecturas y actividades de comprensión y escritura.</p><span class="proximo">Próximamente</span></article><article class="tarjeta"><div class="icono" aria-hidden="true">✧</div><p class="categoria">Ciencia y otras áreas</p><h3>Exploramos nuestro mundo</h3><p>Un espacio para nuevos recursos que despierten la curiosidad y la investigación.</p><span class="proximo">Próximamente</span></article></div></div></section>
+    <section class="contenedor evaluaciones" id="evaluaciones" aria-labelledby="evaluaciones-titulo"><div><p class="etiqueta">Seguimos creciendo</p><h2 id="evaluaciones-titulo">Cada aprendizaje es un nuevo paso</h2><p>Ingresa con tu grado para acceder a tus actividades y evaluaciones.</p></div><a class="boton clara" href="https://ie82661.com/acceso/">Ir a evaluaciones <span aria-hidden="true">↗</span></a></section>
+    <section class="seccion recursos" id="recursos" aria-labelledby="recursos-titulo"><div class="contenedor"><p class="etiqueta">Para nuestra comunidad</p><h2 id="recursos-titulo">Recursos que nos acompañan</h2><div class="recursos-grid"><a href="https://hermanasdicperu.org/820-2/" target="_blank" rel="noopener noreferrer"><span>01</span><div><h3>Conoce a la Madre Eduviges</h3><p>Su historia, su fe y su vocación de servicio.</p></div><span aria-hidden="true">↗</span></a><a href="https://hermanasdicperu.org/" target="_blank" rel="noopener noreferrer"><span>02</span><div><h3>Nuestra familia dominica</h3><p>Conoce más sobre la congregación en el Perú.</p></div><span aria-hidden="true">↗</span></a></div></div></section>
   </main>
-
-  <footer>
-    <div class="contenedor pie">
-      <p>© <span id="anio"></span> I.E. N.° 82661 “Nuestra Señora de Lourdes”</p>
-      <p>Plataforma educativa</p>
-    </div>
-  </footer>
-
+  <footer><div class="contenedor pie"><div><strong>I.E. N.° 82661 “Nuestra Señora de Lourdes”</strong><p>Bambamarca · Una familia que educa con fe, verdad y amor.</p></div><a href="#inicio">Volver al inicio ↑</a></div><div class="contenedor creditos"><span>© <span id="anio">2026</span> · Plataforma educativa</span><span>Imágenes de la Madre Eduviges: <a href="https://hermanasdicperu.org/nuestra-congregacion/fundadores/" target="_blank" rel="noopener noreferrer">Hermanas Dominicas de la Inmaculada Concepción – Perú</a>.</span></div></footer>
   <script src="js/app.js"></script>
 </body>
 </html>
