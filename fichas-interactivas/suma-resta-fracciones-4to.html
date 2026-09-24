@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Ficha interactiva de 50 ejercicios de suma y resta de fracciones para 4.º grado de primaria">
+  <title>Suma y resta de fracciones | 4.º grado</title>
+  <style>
+    :root{
+      --azul:#123a73; --azul2:#1f5fa8; --celeste:#eaf6ff; --dorado:#d9ad4f;
+      --verde:#16835d; --rojo:#b42318; --texto:#1f2937; --gris:#64748b;
+      --borde:#d9e3ee; --blanco:#fff; --fondo:#f6f9fc;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--fondo);color:var(--texto)}
+    .top{background:linear-gradient(135deg,var(--azul),var(--azul2));color:white;padding:22px 16px}
+    .wrap{width:min(900px,calc(100% - 28px));margin:auto}
+    .top h1{margin:0 0 6px;font-size:clamp(1.55rem,4vw,2.25rem)}
+    .top p{margin:0;opacity:.95}
+    main{padding:24px 0 50px}
+    .card{background:white;border:1px solid var(--borde);border-radius:20px;padding:clamp(18px,4vw,30px);box-shadow:0 12px 30px rgba(18,58,115,.08)}
+    .inicio{text-align:center}
+    .inicio .emoji{font-size:4rem}
+    label{font-weight:700;display:block;margin:16px 0 7px}
+    input[type="text"],input[type="number"]{font:inherit;border:2px solid var(--borde);border-radius:12px;padding:12px 14px;outline:none;background:white}
+    input:focus{border-color:var(--azul2);box-shadow:0 0 0 3px rgba(31,95,168,.12)}
+    #nombre{width:min(420px,100%)}
+    .btn{border:0;border-radius:12px;padding:12px 18px;font:inherit;font-weight:800;cursor:pointer;min-height:44px}
+    .btn:disabled{opacity:.45;cursor:not-allowed}
+    .primario{background:var(--azul);color:white}
+    .secundario{background:white;color:var(--azul);border:1px solid var(--borde)}
+    .barra-info{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;margin-bottom:18px}
+    .progreso{height:12px;background:#e7eef6;border-radius:999px;overflow:hidden}
+    .progreso>div{height:100%;width:0;background:linear-gradient(90deg,var(--azul2),var(--dorado));transition:width .25s}
+    .dato{font-weight:800;color:var(--azul);white-space:nowrap}
+    .nivel{display:inline-block;background:var(--celeste);color:var(--azul);font-weight:800;border-radius:999px;padding:7px 11px;font-size:.9rem;margin-bottom:16px}
+    .pregunta{text-align:center;padding:22px 8px}
+    .pregunta small{display:block;color:var(--gris);font-weight:700;margin-bottom:14px}
+    .operacion{display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;font-size:2rem;font-weight:800;color:var(--azul)}
+    .frac{display:inline-grid;grid-template-rows:auto auto;min-width:50px;text-align:center;line-height:1.05}
+    .frac .num{border-bottom:3px solid currentColor;padding:0 7px 5px}
+    .frac .den{padding:5px 7px 0}
+    .respuesta{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap;margin:18px 0}
+    .resp-frac{display:grid;gap:6px;width:94px}
+    .resp-frac input{width:94px;text-align:center;font-size:1.2rem;font-weight:800}
+    .linea{height:3px;background:var(--texto);border-radius:2px}
+    .acciones{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+    .feedback{min-height:54px;margin:18px auto 0;max-width:620px;border-radius:14px;padding:13px 16px;font-weight:700;display:flex;align-items:center;justify-content:center;text-align:center}
+    .feedback.vacio{background:transparent}
+    .feedback.bien{background:#e9f8f1;color:#116744;border:1px solid #b8e7d3}
+    .feedback.mal{background:#fff0ee;color:var(--rojo);border:1px solid #fac8c3}
+    .feedback.info{background:#eef6ff;color:var(--azul);border:1px solid #cfe2f6}
+    .resumen{text-align:center}
+    .puntaje-final{font-size:3.5rem;font-weight:900;color:var(--azul);margin:10px 0}
+    .detalle{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0}
+    .mini{background:var(--celeste);border-radius:14px;padding:16px}
+    .mini strong{display:block;font-size:1.35rem;color:var(--azul)}
+    .oculto{display:none!important}
+    .volver{display:inline-block;margin-top:18px;color:var(--azul);font-weight:800;text-decoration:none}
+    .nota{font-size:.93rem;color:var(--gris);margin-top:16px}
+    @media(max-width:620px){
+      .barra-info{grid-template-columns:1fr 1fr}.progreso{grid-column:1/-1;grid-row:2}
+      .operacion{font-size:1.65rem;gap:12px}
+      .detalle{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <div class="wrap">
+      <h1>➕➖ Suma y resta de fracciones</h1>
+      <p>Ficha interactiva · Matemática · 4.º grado de primaria · 50 ejercicios</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="pantallaInicio" class="card inicio">
+      <div class="emoji">🧠📘</div>
+      <h2>¡Demuestra lo que sabes!</h2>
+      <p>Resolverás 50 ejercicios. Escribe el numerador arriba y el denominador abajo. Puedes escribir una fracción equivalente: el sistema también la reconocerá como correcta.</p>
+      <label for="nombre">Nombre del estudiante</label>
+      <input id="nombre" type="text" maxlength="60" placeholder="Escribe tu nombre">
+      <div class="acciones">
+        <button id="comenzar" class="btn primario" type="button">Comenzar</button>
+        <a class="btn secundario" href="../index.html" style="text-decoration:none">Volver al inicio</a>
+      </div>
+      <p class="nota">En cada ejercicio tendrás hasta 2 intentos antes de ver la respuesta correcta.</p>
+    </section>
+
+    <section id="pantallaJuego" class="card oculto">
+      <div class="barra-info">
+        <div class="dato" id="contador">Ejercicio 1 de 50</div>
+        <div class="dato">✅ <span id="aciertos">0</span></div>
+        <div class="dato">Intentos: <span id="intentos">0</span>/2</div>
+        <div class="progreso"><div id="barra"></div></div>
+      </div>
+
+      <div id="nivel" class="nivel">Fracciones con igual denominador</div>
+
+      <div class="pregunta">
+        <small>Resuelve y escribe la fracción resultante.</small>
+        <div id="operacion" class="operacion" aria-live="polite"></div>
+
+        <div class="respuesta">
+          <span style="font-size:1.35rem;font-weight:800">=</span>
+          <div class="resp-frac" aria-label="Respuesta en forma de fracción">
+            <input id="numResp" type="number" inputmode="numeric" aria-label="Numerador de la respuesta">
+            <div class="linea"></div>
+            <input id="denResp" type="number" inputmode="numeric" aria-label="Denominador de la respuesta">
+          </div>
+        </div>
+
+        <div class="acciones">
+          <button id="comprobar" class="btn primario" type="button">Comprobar</button>
+          <button id="siguiente" class="btn secundario" type="button" disabled>Siguiente →</button>
+        </div>
+
+        <div id="feedback" class="feedback vacio" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section id="pantallaFinal" class="card resumen oculto">
+      <div style="font-size:4rem" id="emojiFinal">🏆</div>
+      <h2 id="tituloFinal">¡Ficha completada!</h2>
+      <p id="mensajeFinal"></p>
+      <div class="puntaje-final"><span id="puntajeFinal">0</span>/50</div>
+      <div class="detalle">
+        <div class="mini"><strong id="correctasFinal">0</strong>correctas</div>
+        <div class="mini"><strong id="erroresFinal">0</strong>no logradas</div>
+        <div class="mini"><strong id="porcentajeFinal">0%</strong>logro</div>
+      </div>
+      <div class="acciones">
+        <button id="reiniciar" class="btn primario" type="button">🔄 Resolver otra vez</button>
+        <a class="btn secundario" href="../index.html" style="text-decoration:none">Volver al inicio</a>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const ejercicios = [
+      [1,4,"+",2,4],[2,5,"+",1,5],[3,8,"+",2,8],[1,6,"+",4,6],[2,7,"+",3,7],
+      [3,10,"+",5,10],[1,9,"+",6,9],[4,12,"+",5,12],[2,3,"+",1,3],[5,8,"+",1,8],
+      [3,5,"-",1,5],[7,8,"-",2,8],[5,6,"-",2,6],[6,7,"-",3,7],[9,10,"-",4,10],
+      [8,9,"-",5,9],[11,12,"-",7,12],[4,5,"-",2,5],[5,7,"-",1,7],[7,10,"-",3,10],
+      [1,2,"+",1,4],[1,3,"+",1,6],[2,3,"+",1,9],[1,4,"+",2,8],[2,5,"+",1,10],
+      [3,4,"+",1,8],[1,2,"+",2,6],[2,3,"+",1,6],[3,5,"+",1,2],[1,3,"+",3,4],
+      [3,4,"-",1,2],[5,6,"-",1,3],[7,8,"-",1,4],[4,5,"-",1,10],[5,6,"-",1,2],
+      [2,3,"-",1,6],[7,10,"-",1,5],[11,12,"-",1,3],[3,4,"-",1,8],[5,9,"-",1,3],
+      [2,4,"+",3,8],[3,6,"+",2,3],[4,5,"+",1,10],[5,8,"+",3,4],[7,12,"+",1,6],
+      [9,10,"-",2,5],[5,8,"-",1,4],[7,9,"-",2,3],[11,12,"-",5,6],[3,4,"+",2,3]
+    ];
+
+    const $ = id => document.getElementById(id);
+    const inicio = $("pantallaInicio");
+    const juego = $("pantallaJuego");
+    const final = $("pantallaFinal");
+    let indice = 0, aciertos = 0, intentos = 0, resuelta = false, nombre = "";
+
+    function mcd(a,b){
+      a=Math.abs(a); b=Math.abs(b);
+      while(b){ const t=b; b=a%b; a=t; }
+      return a || 1;
+    }
+
+    function simplificar(n,d){
+      if(d<0){n=-n;d=-d}
+      const g=mcd(n,d);
+      return [n/g,d/g];
+    }
+
+    function resultado(e){
+      const [a,b,op,c,d]=e;
+      const n=op==="+" ? a*d+c*b : a*d-c*b;
+      const den=b*d;
+      return simplificar(n,den);
+    }
+
+    function fraccionHTML(n,d){
+      return '<span class="frac"><span class="num">'+n+'</span><span class="den">'+d+'</span></span>';
+    }
+
+    function mostrar(){
+      const e=ejercicios[indice];
+      $("contador").textContent="Ejercicio "+(indice+1)+" de "+ejercicios.length;
+      $("aciertos").textContent=aciertos;
+      $("intentos").textContent=intentos;
+      $("barra").style.width=((indice/ejercicios.length)*100)+"%";
+      $("nivel").textContent=indice<20 ? "Nivel 1 · Igual denominador" : (indice<40 ? "Nivel 2 · Diferente denominador" : "Nivel 3 · Repaso");
+      $("operacion").innerHTML=fraccionHTML(e[0],e[1])+' <span>'+e[2]+'</span> '+fraccionHTML(e[3],e[4]);
+      $("numResp").value="";
+      $("denResp").value="";
+      $("numResp").disabled=false;
+      $("denResp").disabled=false;
+      $("comprobar").disabled=false;
+      $("siguiente").disabled=true;
+      $("feedback").className="feedback vacio";
+      $("feedback").textContent="";
+      resuelta=false;
+      intentos=0;
+      $("intentos").textContent=0;
+      setTimeout(()=>$("numResp").focus(),50);
+    }
+
+    function comprobar(){
+      if(resuelta) return;
+      const n=parseInt($("numResp").value,10);
+      const d=parseInt($("denResp").value,10);
+
+      if(!Number.isInteger(n)||!Number.isInteger(d)){
+        $("feedback").className="feedback info";
+        $("feedback").textContent="Escribe el numerador y el denominador.";
+        return;
+      }
+      if(d===0){
+        $("feedback").className="feedback mal";
+        $("feedback").textContent="El denominador no puede ser 0.";
+        return;
+      }
+
+      intentos++;
+      $("intentos").textContent=intentos;
+      const [rn,rd]=resultado(ejercicios[indice]);
+      const correcta=(n*rd===rn*d);
+
+      if(correcta){
+        aciertos++;
+        resuelta=true;
+        $("aciertos").textContent=aciertos;
+        $("feedback").className="feedback bien";
+        $("feedback").textContent="¡Muy bien! ✅ La respuesta simplificada es "+rn+"/"+rd+".";
+        terminarPregunta();
+      }else if(intentos<2){
+        $("feedback").className="feedback mal";
+        $("feedback").textContent="Aún no. Revisa la operación y vuelve a intentarlo. 💪";
+        $("numResp").focus();
+      }else{
+        resuelta=true;
+        $("feedback").className="feedback info";
+        $("feedback").textContent="La respuesta correcta es "+rn+"/"+rd+". Observa y continúa con el siguiente ejercicio.";
+        terminarPregunta();
+      }
+    }
+
+    function terminarPregunta(){
+      $("numResp").disabled=true;
+      $("denResp").disabled=true;
+      $("comprobar").disabled=true;
+      $("siguiente").disabled=false;
+      $("siguiente").focus();
+    }
+
+    function siguiente(){
+      if(!resuelta) return;
+      indice++;
+      if(indice>=ejercicios.length){
+        terminar();
+      }else{
+        mostrar();
+      }
+    }
+
+    function terminar(){
+      juego.classList.add("oculto");
+      final.classList.remove("oculto");
+      $("barra").style.width="100%";
+      const pct=Math.round((aciertos/ejercicios.length)*100);
+      $("puntajeFinal").textContent=aciertos;
+      $("correctasFinal").textContent=aciertos;
+      $("erroresFinal").textContent=ejercicios.length-aciertos;
+      $("porcentajeFinal").textContent=pct+"%";
+      const quien=nombre ? nombre+", " : "";
+      let emoji="🌟", msg="";
+      if(aciertos>=45){emoji="🏆";msg=quien+"¡Excelente trabajo! Dominas muy bien la suma y resta de fracciones."}
+      else if(aciertos>=35){emoji="🌟";msg=quien+"¡Muy buen trabajo! Sigue practicando para fortalecer lo aprendido."}
+      else if(aciertos>=25){emoji="💪";msg=quien+"Vas avanzando. Repasa los ejercicios que fueron más difíciles y vuelve a intentarlo."}
+      else{emoji="📘";msg=quien+"Necesitas un poco más de práctica. Repasa con calma y vuelve a resolver la ficha."}
+      $("emojiFinal").textContent=emoji;
+      $("mensajeFinal").textContent=msg;
+      window.scrollTo({top:0,behavior:"smooth"});
+    }
+
+    $("comenzar").addEventListener("click",()=>{
+      nombre=$("nombre").value.trim();
+      inicio.classList.add("oculto");
+      final.classList.add("oculto");
+      juego.classList.remove("oculto");
+      indice=0; aciertos=0; intentos=0; resuelta=false;
+      mostrar();
+    });
+
+    $("comprobar").addEventListener("click",comprobar);
+    $("siguiente").addEventListener("click",siguiente);
+    $("reiniciar").addEventListener("click",()=>{
+      final.classList.add("oculto");
+      inicio.classList.remove("oculto");
+      $("nombre").focus();
+      window.scrollTo({top:0,behavior:"smooth"});
+    });
+
+    ["numResp","denResp"].forEach(id=>{
+      $(id).addEventListener("keydown",e=>{
+        if(e.key==="Enter"){
+          if(resuelta) siguiente(); else comprobar();
+        }
+      });
+    });
+  </script>
+</body>
+</html>
