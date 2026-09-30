@@ -5,6 +5,7 @@
   const pendingKey = `ie82661:fracciones50:respuesta:${student}`;
   let csrf = document.querySelector('meta[name="csrf-token"]').content;
   let state = null, pending = null, sending = false, storage = true;
+  let visibleOptions = [];
   try { pending = JSON.parse(sessionStorage.getItem(pendingKey) || 'null'); } catch { storage = false; }
   const remember = () => {
     try { if (pending) sessionStorage.setItem(pendingKey, JSON.stringify(pending)); else sessionStorage.removeItem(pendingKey); }
@@ -43,6 +44,10 @@
   };
   const focusChoice = () => $('opciones').querySelector('input')?.focus();
   const operation = question => {
+    visibleOptions = question.options;
+    $('imagen-ejercicio').src = question.image;
+    $('imagen-ejercicio').alt = question.visual_alt;
+    $('feedback').className = 'feedback';
     $('tema').textContent = question.category;
     $('consigna').textContent = question.prompt;
     const [a,b,op,c,d] = question.operation;
@@ -58,8 +63,22 @@
       const radio = document.createElement('input'); radio.type = 'radio'; radio.name = 'alternativa'; radio.value = String(index); radio.required = true;
       radio.addEventListener('change', () => { $('numerador').value = String(value[0]); $('denominador').value = String(value[1]); });
       const letter = document.createElement('span'); letter.className = 'option-letter'; letter.textContent = 'ABCD'[index];
-      label.append(radio,letter,fraction(value)); $('opciones').append(label);
+      const status = document.createElement('span'); status.className = 'option-result';
+      label.append(radio,letter,fraction(value),status); $('opciones').append(label);
     });
+  };
+  const markOption = (value, correct) => {
+    visibleOptions.forEach((option,index) => {
+      if (option[0] * value[1] !== value[0] * option[1]) return;
+      const label = $('opciones').children[index];
+      label.className = `option ${correct ? 'answer-correct' : 'answer-wrong'}`;
+      label.children[3].textContent = correct ? '✓ Correcta' : '✕ Incorrecta';
+    });
+  };
+  const paintFeedback = (response, submitted) => {
+    markOption([submitted.numerator, submitted.denominator], response.correct);
+    $('feedback').className = `feedback ${response.correct ? 'feedback-correct' : 'feedback-wrong'}`;
+    if (response.terminal && response.expected) markOption(response.expected.split('/').map(Number), true);
   };
   const render = () => {
     message(''); $('volver').hidden = true; $('recargar').hidden = true;
@@ -73,6 +92,7 @@
     $('barra').max = a.total; $('barra').value = a.current;
     $('intentos').textContent = `Intento ${a.tries + 1} de 2. Elige una de las cuatro alternativas.`;
     operation(a.question);
+    for (const choice of a.choices || []) markOption([Number(choice.numerator), Number(choice.denominator)], Boolean(Number(choice.correct)));
     $('numerador').value = ''; $('denominador').value = '';
     $('feedback').textContent = a.tries ? 'Tu primer intento está guardado. Puedes volver a responder.' : '';
     $('siguiente').hidden = true; $('comprobar').hidden = false; $('reintentar').hidden = true; lock(false);
@@ -82,11 +102,13 @@
     sending = true; lock(true); $('reintentar').disabled = true; message('');
     $('guardado').textContent = 'Guardando tu respuesta…';
     try {
+      const submitted = pending;
       const data = await request(pending);
       if (!data.saved) throw new Error('Falta confirmar el guardado.');
       pending = null; remember(); setState(data);
       if (recovering === true) { render(); $('guardado').textContent = '✓ Respuesta recuperada y guardada para tu docente.'; return; }
       const response = data.response;
+      paintFeedback(response, submitted);
       $('guardado').textContent = '✓ Respuesta guardada para tu docente.';
       $('reintentar').hidden = true;
       $('feedback').textContent = response.correct ? `¡Correcto! ${response.explanation || ''}` : response.terminal ? `La respuesta correcta es ${response.expected}. ${response.explanation || ''}` : 'Aún no es correcto. Revisa las fracciones e inténtalo una vez más.';

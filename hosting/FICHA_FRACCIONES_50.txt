@@ -1,7 +1,11 @@
-FICHA INTERACTIVA · 50 RETOS DE FRACCIONES
+FICHA INTERACTIVA · 5.º GRADO · 50 RETOS CON IMÁGENES
 I.E. N.° 82661 Nuestra Señora de Lourdes
 
 CONTENIDO
+50 situaciones para 5.º grado con modelos visuales de barras fraccionadas.
+Alternativa incorrecta en rojo y correcta en verde, con texto y símbolos.
+En el primer error se conserva el segundo intento. Tras dos errores se revela
+la alternativa correcta en verde. Los colores aparecen al enviar y validar.
 20 ejercicios de fracciones homogéneas (10 sumas y 10 restas).
 20 ejercicios de fracciones heterogéneas (10 sumas y 10 restas).
 10 ejercicios para identificar fracciones equivalentes.
@@ -40,6 +44,10 @@ https://ie82661.com/acceso/fracciones50/ficha.php
 Necesita sesión de estudiante; el acceso inicial muestra las actividades.
 
 QUÉ CAMBIA
+Esta versión agrega 50 imágenes SVG locales y actualiza los enunciados para
+5.º grado. Conserva los valores matemáticos y el orden de los intentos previos.
+Las respuestas anteriores permanecen en el administrador; las prácticas nuevas
+aparecen con el título «5.º grado». No necesitas crear otro usuario docente.
 Se agrega acceso/fracciones50/ y una tarjeta en el panel de estudiantes.
 Se actualiza seguimiento/api.php para separar los identificadores de las fichas.
 La ficha anterior conserva sus preguntas, avances y resultados.

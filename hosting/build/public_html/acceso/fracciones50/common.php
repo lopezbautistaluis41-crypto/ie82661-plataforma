@@ -102,7 +102,7 @@ function reg_student(): array {
     return $s;
 }
 function reg_activity(): array {
-    return ['id'=>'fracciones-50-opciones-v1', 'title'=>'Fracciones homogéneas, heterogéneas y equivalentes · 50 ejercicios', 'questions'=>require __DIR__.'/questions.php'];
+    return ['id'=>'fracciones-50-opciones-v1', 'title'=>'5.º grado · Fracciones homogéneas, heterogéneas y equivalentes · 50 ejercicios', 'questions'=>require __DIR__.'/questions.php'];
 }
 function reg_expected(array $q): array { return $q['answer']; }
 function quiz_shuffle(array $values): array {
@@ -139,7 +139,7 @@ function quiz_plan(string $attempt): array {
 }
 function quiz_public_question(array $attempt): array {
     $index=(int)$attempt['current_question']; $q=reg_activity()['questions'][$index];
-    return ['category'=>$q['category'],'prompt'=>$q['prompt'],'operation'=>$q['operation'],'options'=>quiz_plan($attempt['id'])[$index]];
+    return ['category'=>$q['category'],'prompt'=>$q['prompt'],'operation'=>$q['operation'],'image'=>$q['image'],'visual_alt'=>$q['visual_alt'],'options'=>quiz_plan($attempt['id'])[$index]];
 }
 function reg_attempt(string $id, string $student): array {
     $q=reg_db()->prepare('SELECT * FROM attempts WHERE id=? AND student_id=?');
@@ -153,7 +153,9 @@ function reg_state(?array $attempt, array $student): array {
     $index=(int)$attempt['current_question']; $activity=reg_activity();
     $q=reg_db()->prepare('SELECT COUNT(*) FROM responses WHERE attempt_id=? AND question_index=?');
     $q->execute([$attempt['id'],$index]);
-    $result['attempt']=['id'=>$attempt['id'],'title'=>$attempt['activity_title'],'total'=>(int)$attempt['total'], 'current'=>$index,
+    $history=reg_db()->prepare('SELECT numerator,denominator,correct FROM responses WHERE attempt_id=? AND question_index=? ORDER BY try_number');
+    $history->execute([$attempt['id'],$index]);
+    $result['attempt']=['choices'=>$history->fetchAll(),'id'=>$attempt['id'],'title'=>$attempt['activity_title'],'total'=>(int)$attempt['total'], 'current'=>$index,
         'correct'=>(int)$attempt['correct_count'],'completed'=>$attempt['completed_at']!==null,'tries'=>(int)$q->fetchColumn(),
         'question'=>$attempt['completed_at']===null ? quiz_public_question($attempt) : null];
     return $result;
