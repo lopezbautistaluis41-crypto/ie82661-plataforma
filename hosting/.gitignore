@@ -1,0 +1,9 @@
+private_ie82661/
+build/private_ie82661/
+ACTIVAR_ADMINISTRADOR.txt
+build/ACTIVAR_ADMINISTRADOR.txt
+*.sqlite
+*.sqlite-*
+*.zip
+__pycache__/
+runtime/
