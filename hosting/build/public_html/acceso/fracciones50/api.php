@@ -33,7 +33,6 @@ try {
     if ($body['denominator']===0 || abs($body['denominator'])>10000 || abs($body['numerator'])>10000) reg_json(['error'=>'Usa números entre −10000 y 10000 y un denominador distinto de cero.'],422);
     $event=reg_transaction(function(PDO $db) use ($body,$student,$activity): array {
         $attempt=reg_attempt($body['attempt_id'],$student['id']);
-        if ($attempt['activity']!==$activity['id']) throw new DomainException('Esta actividad corresponde a otra ficha.',404);
         $q=$db->prepare('SELECT * FROM responses WHERE request_id=?'); $q->execute([$body['request_id']]); $old=$q->fetch();
         if ($old) {
             if ($old['attempt_id']!==$attempt['id'] || (int)$old['question_index']!==$body['question'] || (int)$old['numerator']!==$body['numerator'] || (int)$old['denominator']!==$body['denominator']) throw new DomainException('Este envío ya tiene otra respuesta. Recarga la página.',409);
@@ -44,7 +43,11 @@ try {
         $q=$db->prepare('SELECT COUNT(*) FROM responses WHERE attempt_id=? AND question_index=?'); $q->execute([$attempt['id'],$i]); $try=(int)$q->fetchColumn()+1;
         if ($try>2) throw new DomainException('Esta pregunta ya está cerrada.',409);
         $correct=$body['numerator']*$d === $n*$body['denominator']; $terminal=$correct || $try===2;
-        $now=reg_now(); $expected="$n/$d"; $text="$question[0]/$question[1] $question[2] $question[3]/$question[4]";
+        $options=quiz_plan($attempt['id'])[$i]; $choice=null;
+        foreach ($options as $letter=>$option) if ($option===[$body['numerator'],$body['denominator']]) $choice=$letter;
+        if ($choice===null) throw new DomainException('Selecciona una de las cuatro alternativas.',400);
+        $now=reg_now(); $expected="$n/$d";
+        $text=$question['category'].': '.$question['text'].' · Alternativa '.chr(65+$choice).' ('.$body['numerator'].'/'.$body['denominator'].')';
         $db->prepare('INSERT INTO responses(request_id,attempt_id,question_index,try_number,question,numerator,denominator,expected,correct,terminal,answered_at) VALUES(?,?,?,?,?,?,?,?,?,?,?)')
             ->execute([$body['request_id'],$attempt['id'],$i,$try,$text,$body['numerator'],$body['denominator'],$expected,(int)$correct,(int)$terminal,$now]);
         $finished=$terminal && $i+1===(int)$attempt['total'];
@@ -55,7 +58,7 @@ try {
     $result=reg_state(reg_attempt($body['attempt_id'],$student['id']),$student);
     $result['saved']=true;
     $result['response']=['question'=>(int)$event['question_index'],'try'=>(int)$event['try_number'],'correct'=>(bool)$event['correct'],'terminal'=>(bool)$event['terminal']];
-    if ($event['terminal']) $result['response']['expected']=$event['expected'];
+    if ($event['terminal']) { $result['response']['expected']=$event['expected']; $result['response']['explanation']=$activity['questions'][(int)$event['question_index']]['explanation']; }
     reg_json($result);
 } catch (DomainException $e) { reg_json(['error'=>$e->getMessage()], in_array($e->getCode(),[401,404,409],true)?$e->getCode():400); }
 catch (JsonException $e) { reg_json(['error'=>'Solicitud no válida.'],400); }

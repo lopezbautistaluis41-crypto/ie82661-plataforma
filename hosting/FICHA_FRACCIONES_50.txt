@@ -1,0 +1,66 @@
+FICHA INTERACTIVA · 50 RETOS DE FRACCIONES
+I.E. N.° 82661 Nuestra Señora de Lourdes
+
+CONTENIDO
+20 ejercicios de fracciones homogéneas (10 sumas y 10 restas).
+20 ejercicios de fracciones heterogéneas (10 sumas y 10 restas).
+10 ejercicios para identificar fracciones equivalentes.
+Cuatro alternativas por pregunta. La posición correcta cambia aleatoriamente
+en cada práctica nueva, sin repetir la letra en preguntas consecutivas.
+Cada letra es correcta 12 o 13 veces en una ficha completa.
+Dos intentos, explicación al resolver/cerrar cada ejercicio y resultado final.
+
+REQUISITO
+Tener instalado el paquete administrador_respuestas_ie82661.zip entregado
+anteriormente, con las cuentas de estudiantes y el administrador funcionando.
+PHP 8.1 o superior, pdo_sqlite y HTTPS, como en el módulo anterior.
+Este ZIP es una actualización; no crea contraseñas ni una cuenta docente nueva.
+
+INSTALACIÓN EN CPANEL
+1. Abre Administrador de archivos y entra en /home/iecom1.
+2. Antes de extraer, descarga una copia de estos dos archivos existentes:
+   public_html/acceso/panel.php
+   public_html/acceso/seguimiento/api.php
+3. Sube ficha_interactiva_fracciones_50.zip a /home/iecom1.
+4. Selecciona el ZIP y pulsa Extraer. El destino debe ser /home/iecom1,
+   NO public_html. Si el cuadro muestra el icono de casa y un campo relativo,
+   usa /, como en la instalación anterior. Confirma la ruta en tu cPanel.
+5. La carpeta nueva debe quedar exactamente en:
+   /home/iecom1/public_html/acceso/fracciones50/
+6. Abre https://ie82661.com/acceso/ e ingresa como estudiante.
+   En Mis actividades, pulsa «Comenzar los 50 retos».
+   Si ya estabas conectado desde antes de instalar el administrador,
+   cierra sesión y vuelve a ingresar.
+7. Envía una alternativa. Debe aparecer «Respuesta guardada para tu docente».
+8. Ingresa a https://ie82661.com/acceso/administrador/ y pulsa Ver respuestas.
+   Verás el tema, ejercicio, letra elegida, fracción, resultado y fecha.
+
+DIRECCIÓN DE LA NUEVA FICHA DESPUÉS DE INSTALAR
+https://ie82661.com/acceso/fracciones50/ficha.php
+Necesita sesión de estudiante; el acceso inicial muestra las actividades.
+
+QUÉ CAMBIA
+Se agrega acceso/fracciones50/ y una tarjeta en el panel de estudiantes.
+Se actualiza seguimiento/api.php para separar los identificadores de las fichas.
+La ficha anterior conserva sus preguntas, avances y resultados.
+Se agrega automáticamente una tabla con el orden de las alternativas dentro
+de la base privada ya existente. El orden se mantiene al recargar o reintentar.
+No se reemplazan la base de respuestas, las cuentas ni las contraseñas.
+La portada de GitHub no se modifica con este ZIP.
+
+REGISTRO Y PUNTAJE
+Se conservan tanto las respuestas correctas como las incorrectas, incluso si
+el estudiante aún no termina. Un acierto significa que resolvió el ejercicio
+dentro de los dos intentos. El máximo es 50. Una práctica nueva conserva
+el historial anterior. Las respuestas pendientes requieren conexión para
+confirmar el guardado: mantener la página abierta y usar Reintentar guardado.
+El administrador existente consulta y exporta esta ficha sin cambios adicionales.
+
+SI HACE FALTA DESHACER LA ACTUALIZACIÓN
+Restaura únicamente las copias de panel.php y seguimiento/api.php.
+Los registros y la ficha nueva permanecen conservados; no borres la base privada.
+
+ESTADO DE ENTREGA
+Paquete probado localmente con cuentas ficticias. La publicación real está
+pendiente: cPanel mostró «Site Unavailable» desde la sesión de trabajo.
+No se afirma que este paquete ya esté instalado o funcionando en producción.

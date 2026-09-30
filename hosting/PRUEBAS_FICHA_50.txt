@@ -1,0 +1,11 @@
+VERIFICACIÓN LOCAL — 30/09/2026
+288 comprobaciones aprobadas usando PHP real, SQLite y cuentas ficticias.
+1.000 distribuciones aleatorias comprobadas: letras equilibradas, sin repetir
+la correcta consecutivamente y cuatro alternativas matemáticamente distintas.
+50 ejercicios distintos verificados mediante fracciones exactas.
+Registro de los dos intentos, recarga, envío duplicado, separación de alumnos,
+separación de fichas, consulta del administrador y exportación CSV comprobados.
+Pruebas JavaScript: selección de alternativa, bloqueo durante el envío,
+reintento sin duplicar, recuperación tras recarga y sesión vencida.
+La ficha anterior mantiene su funcionamiento y sus registros.
+No se ha comprobado visualmente en un navegador móvil ni instalado en producción.
